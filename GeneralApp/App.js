@@ -1,69 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  SafeAreaView,
   View,
-  FlatList,
-  StyleSheet,
   Text,
-  StatusBar,
+  StyleSheet,
+  FlatList,
+  SafeAreaView,
+  TouchableOpacity,
 } from "react-native";
 
-const DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item",
-  },
-];
-
-const Item = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
-
 const App = () => {
-  const renderItem = ({ item }) => <Item title={item.title} />;
-  const [images, setimages] = useState([
-    require("./assets/image1.png"),
-    require("./assets/image2.png"),
-    require("./assets/image3.png"),
-    require("./assets/image4.png"),
-    require("./assets/image5.png"),
+  const [people, setpeople] = useState([
+    { name: "shaun", id: "1" },
+    { name: "yoshi", id: "2" },
+    { name: "mario", id: "3" },
+    { name: "luigi", id: "4" },
+    { name: "peach", id: "5" },
+    { name: "toad", id: "6" },
+    { name: "abc", id: "7" },
+    { name: "hamza", id: "8" },
+    { name: "ali", id: "9" },
+    { name: "asghar", id: "10" },
+    { name: "alo", id: "11" },
+    { name: "asdasfjad", id: "12" },
+    { name: "bower", id: "13" },
   ]);
-
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView>
       <FlatList
-        data={DATA}
-        renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        horizontal
+        data={people}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() => {
+              alert("My Name is: " + item.name);
+            }}
+          >
+            <Text style={styles.item}>{item.name}</Text>
+          </TouchableOpacity>
+        )}
+        style={styles.list}
       />
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
   item: {
-    backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 20,
+    padding: 10,
+    marginTop: 40,
+    backgroundColor: "pink",
+    color: "black",
   },
-  title: {
-    fontSize: 32,
+  list: {
+    backgroundColor: "black",
+    padding: 30,
+    paddingTop: 100,
   },
 });
 
